@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Corrida do Amor 💘</title>
+  <style>
+    body {
+      background: #ffe6f0;
+      font-family: 'Comic Sans MS', cursive;
+      text-align: center;
+      margin-top: 50px;
+      overflow: hidden;
+    }
+    #pista {
+      width: 80%;
+      margin: 0 auto;
+      height: 150px;
+      background: #fff0f5;
+      border: 2px dashed #ff69b4;
+      position: relative;
+    }
+    #bichinho {
+      position: absolute;
+      top: 30px;
+      left: 0;
+      font-size: 50px;
+      transition: left 0.5s ease;
+    }
+    #final {
+      position: absolute;
+      right: 10px;
+      top: 40px;
+      font-size: 40px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      background: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    #mensagem {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #ffe6f0;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      color: #d10069;
+      z-index: 10;
+      padding: 30px;
+      text-align: center;
+      flex-direction: column;
+    }
+
+    #explosao {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 20;
+    }
+
+    .cora {
+      position: absolute;
+      font-size: 30px;
+      animation: subir 1.5s ease-out forwards;
+      color: #ff1493;
+      pointer-events: none;
+    }
+
+    @keyframes subir {
+      from {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      to {
+        opacity: 0;
+        transform: translateY(-150px) scale(1.5);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="conteudo">
+    <h1>Corrida do Amor 💕</h1>
+    <p>Ajude o coelhinho a chegar até o coração da Juliana!</p>
+
+    <div id="pista">
+      <div id="bichinho">🐰</div>
+      <div id="final">💖</div>
+    </div>
+
+    <button onclick="correr()">Correr</button>
+  </div>
+
+  <div id="mensagem">
+    <div>💖 Eu te amo, meu bichinho!<br>Feliz Dia dos Namorados 💘</div>
+    <div id="explosao"></div>
+  </div>
+
+  <script>
+    let posicao = 0;
+    const bichinho = document.getElementById("bichinho");
+    const mensagem = document.getElementById("mensagem");
+    const conteudo = document.getElementById("conteudo");
+    const explosao = document.getElementById("explosao");
+
+    function correr() {
+      if (posicao < 90) {
+        posicao += 10;
+        bichinho.style.left = posicao + "%";
+      } else {
+        conteudo.style.display = "none";
+        mensagem.style.display = "flex";
+        explodirCoracoes();
+      }
+    }
+
+    function explodirCoracoes() {
+      for (let i = 0; i < 60; i++) {
+        const cora = document.createElement("div");
+        cora.classList.add("cora");
+        cora.innerText = "💖";
+        cora.style.left = Math.random() * window.innerWidth + "px";
+        cora.style.top = Math.random() * window.innerHeight + "px";
+        explosao.appendChild(cora);
+
+        setTimeout(() => {
+          cora.remove();
+        }, 1500);
+      }
+    }
+  </script>
+</body>
+</html>
